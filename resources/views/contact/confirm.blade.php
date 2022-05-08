@@ -102,6 +102,7 @@
         value="{{ $inputs['gender'] }}"
         type="hidden">  
 </td>
+
 </tr>
 <tr> 
 <th class="user_info-th"><label>メールアドレス</label></th>

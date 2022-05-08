@@ -144,7 +144,7 @@ span {
 <body>
    <h2>お問い合わせ</h2>
 <section class=wrap_indx>
-<form class="h-adr" method="POST" action="/contact">
+<form class="h-adr" method="POST" action="/contact/confirm">
      @csrf
 <div>
  <label for="name" class="lab_name">お名前<span>※</span></label>  
@@ -180,7 +180,7 @@ span {
 </div>
 <div class="email_box">
   <label for="email">メールアドレス<span>※</span></label>
-  <input class="email_box_mg" type="email" name="email" value="{{old('email')}}" required >
+  <input class="email_box_mg" type="email" name="email" value="{{old('email')}}" required>
   @error('email') 
       <tr>
         <th>エラー</th>
@@ -191,11 +191,17 @@ span {
 <div class="email_exam"> 例）test@example.com</div>
 <div class="post_address">  
 <span class="p-country-name" style="display:none;">Japan</span>
-<p class="pos">〒<input type="text" name="postcode" class="p-postal-code" size="8" maxlength="8" onblur="toHalfWidth(this)"><br></p> 
+<p class="pos">〒<input type="postcode" name="text" class="p-postal-code" size="8" maxlength="8" onblur="toHalfWidth(this)"><br></p> 
 <div class="post_exam"> 例）123-4567</div>
+@error('address') 
+      <tr>
+        <th>エラー</th>
+        <td>{{$message}}</td>
+      </tr>
+  @enderror  
 <div class="address_msk">
 <p class="add">住所<span>※</span>
-<p class="add_1"><input style="font-size: 25px; width: 650px" type="text" name="address" class="p-region p-locality p-street-address p-extended-address"/><br></p>
+<p class="add_1"><input required style="font-size: 25px; width: 650px" type="text" name="address" class="p-region p-locality p-street-address p-extended-address"/><br></p>
   @error('address') 
       <tr>
         <th>エラー</th>
@@ -206,7 +212,7 @@ span {
 <div class="address_exam"> 例）東京都渋谷区千駄ヶ谷1-2-3</div>
 <div class="address_bl">
   <label for="building_name">建物名</label> 
-  <input class="address_bl-box" style="width: 655px" type="text" name="building_name" value="{{old('building_name')}}" />
+  <input   class="address_bl-box" style="width: 655px" type="text" name="building_name" value="{{old('building_name')}}">
   @error('building_name') 
       <tr>
         <th>エラー</th>
