@@ -179,7 +179,7 @@ h2 {
       <form action="/delete/{{$contact->id}}" name="id" method="post">
           @csrf
       <button class="button-delete">削除</button>
-      </from>
+      </form>
     </td>
   </tr>
 @endforeach
