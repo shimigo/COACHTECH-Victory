@@ -23,6 +23,7 @@ class ManagementController extends Controller
       if(!empty($keyword_fullname) && empty($keyword_from) && empty($keyword_until) && empty($keyword_email)) {
       $query = Contact::query();
       $contacts = $query->where('fullname','like', '%' .$keyword_fullname. '%')->get();
+      $contacts = Contact::Paginate(10); 
       return view('/search')->with([
         'contacts' => $contacts,
       ]);
@@ -30,6 +31,7 @@ class ManagementController extends Controller
     elseif(empty($keyword_fullname) && ($keyword_gender == 0) && empty($keyword_from) && empty($keyword_until) && empty($keyword_email)){
       $query = Contact::query();
       $contacts = $query->where('gender', '>=', 1)->get();
+      $contacts = Contact::Paginate(10); 
       return view('/search')->with([
               'contacts' => $contacts,
             ]);
@@ -37,6 +39,7 @@ class ManagementController extends Controller
     elseif(empty($keyword_fullname) && ($keyword_gender == 1) && empty($keyword_from) && empty($keyword_until) && empty($keyword_email)){
       $query = Contact::query();
       $contacts = $query->where('gender','1')->get();
+      $contacts = Contact::Paginate(10); 
       return view('/search')->with([
               'contacts' => $contacts,
             ]);
@@ -44,6 +47,7 @@ class ManagementController extends Controller
     elseif(empty($keyword_fullname) && ($keyword_gender == 2) && empty($keyword_from) && empty($keyword_until) && empty($keyword_email)){
       $query = Contact::query();
       $contacts = $query->where('gender','2')->get();
+      $contacts = Contact::Paginate(10); 
       return view('/search')->with([
               'contacts' => $contacts,
             ]);
@@ -51,6 +55,7 @@ class ManagementController extends Controller
     elseif(empty($keyword_fullname) && !empty($keyword_from) && !empty($keyword_until) && empty($keyword_email)){
      $query = Contact::query();
       $contacts = $query->whereBetween('created_at', [$keyword_from, $keyword_until])->get();
+      $contacts = Contact::Paginate(10); 
       return view('/search')->with([
         'contacts' => $contacts,
       ]); 
@@ -58,6 +63,7 @@ class ManagementController extends Controller
     elseif(empty($keyword_fullname) && empty($keyword_from) && empty($keyword_until) && !empty($keyword_email)){
       $query = Contact::query();
       $contacts = $query->where('email', $keyword_email)->get();
+      $contacts = Contact::Paginate(10); 
       return view('/search')->with([
         'contacts' => $contacts,
       ]); 
@@ -68,6 +74,7 @@ class ManagementController extends Controller
   } 
    public function delete(Request $request, $id){  
       $contacts = Contact::find($request->id)->delete($id);
+      $contacts = Contact::Paginate(10); 
        return redirect('/search');    
     }    
 }
