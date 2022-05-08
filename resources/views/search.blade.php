@@ -184,7 +184,7 @@ h2 {
   </tr>
 @endforeach
 </table>
-{{ $items->links()}}
+{{ $contacts->links()}}
 </div>
 
 </body>
